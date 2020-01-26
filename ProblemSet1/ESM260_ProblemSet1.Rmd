@@ -1,0 +1,10 @@
+---
+title: "ESM 260 - Problem Set 1"
+author: "Laura Ingulsrud"
+date: "1/26/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
