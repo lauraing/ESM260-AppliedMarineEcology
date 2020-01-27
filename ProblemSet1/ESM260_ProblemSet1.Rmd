@@ -16,7 +16,7 @@ library(tidyverse)
 
 ```
 
-```{r data, include=False}
+```{r data, include=FALSE}
 
 # Read in data
 density <- read_csv("density_organisms.csv")
@@ -28,7 +28,7 @@ recruited <- read_csv("recruited_fish.csv")
 
 For data set I (Mean Density of Adults) compare and contrast changes in the Rarotongan and Aitutaki Lagoons since 2009. For each organism, make a histogram that displays the mean density of the organism (y-axis) at Rarotonga and Aitutaki for 2009 and for 2018. Add the 95% confidence intervals to each graph. In your narrative, state which organisms that showed a statistically significant difference in density between Rarotonga and Aitutaki, and which showed a statistically significant difference between 2009 and 2019. State what the trends are. For now, we’ll adopt the convention that 2 means are statistically different if the mean of each is not included in the 95% confidence interval of the other mean.
 
-```{r #1, echo=FALSE, message=FALSE}
+```{r #1}
 
 # Create bar charts for each organism that displays the mean density of the organism (y-axis) at Rarotonga and Aitutaki for 2009 and 2018. Add the 95% confidence intervals to each graph.
 
@@ -240,45 +240,160 @@ algae_plot <- ggplot(algae, aes(x = location, y = density, fill = location)) +
 algae_plot
 
 ```
+There were significantly less adult Surgeonfish in Rarotonga compared to Aitutaki in both 2009 and 2018, although this difference is more drastic in 2018. In Rarotonga, adult Surgeonfish significantly decreased from 2009 to 2018.
+
+There were significantly less adult Coral Trout in Rarotonga compared to Aitutaki in 2009. In Aitutaki and Rarotonga, adult Coral Trout significantly decreased from 2009 to 2018.
+
+There were significantly less adult Spotted Damselfish in Rarotonga compared to Aitutaki in both 2009 and 2018. In Aitutaki and Rarotonga, adult Spotted Damselfish significantly decreased from 2009 to 2018.
+
+In Aitutaki and Rarotonga, adult Yellow Damselfish significantly increased from 2009 to 2018. 
+
 
 ####2. Mean Density of Recruited Young Fish
 
 Do the same as in Question 1 for the recruits (young) of each fish species.
+```{r #2}
 
-```{r}
+# Create bar charts for each recruit (young) of each fish species that displays the mean density of the organism (y-axis) at Rarotonga and Aitutaki for 2009 and 2018. Add the 95% confidence intervals to each graph.
+
+# Surgeonfish
+surgeonfish_recruit <- recruited %>% 
+  filter(fish == "Surgeonfish") %>% 
+  filter(number != 0)
+
+surgeonfish_recruit_plot <- ggplot(surgeonfish_recruit, aes(x = location, y = number, fill = location)) +
+  geom_bar(stat = "identity", color = "black", position = "dodge") +
+  geom_errorbar(aes(ymin = number - CI, ymax = number + CI), position = position_dodge(0.9), width = 0.3) +
+  facet_wrap(~year) +
+  labs(
+    x = "Lagoon", 
+    y = expression(Mean~Density~of~Fish~Recruits~(per~1~m^2~of~microhabitat)),
+    title = "Mean Density of Recruited Surgeonfish at Rarotonga and Aitutaki Lagoons in 2009 and 2018") +
+  scale_y_continuous(expand = c(0,0), limits = c(0,45), breaks = seq(0,45,10)) +
+  scale_x_discrete(expand = c(0,0)) +
+  scale_fill_manual(name = "Lagoon", breaks = c("Aitutaki", "Rarotonga"), values = alpha(c("cornflowerblue", "mediumseagreen"), 0.75)) +
+  theme_bw() +
+  theme(text = element_text(family = "serif")) +
+  theme(plot.title = element_text(size = 12, hjust = 0.5, face = "bold")) +
+  theme(panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))
+
+surgeonfish_recruit_plot  
+
+# Coral Trout
+coraltrout_recruit <- recruited %>% 
+  filter(fish == "Coral Trout") %>% 
+  filter(number != 0)
+
+coraltrout_recruit_plot <- ggplot(coraltrout_recruit, aes(x = location, y = number, fill = location)) +
+  geom_bar(stat = "identity", color = "black", position = "dodge") +
+  geom_errorbar(aes(ymin = number - CI, ymax = number + CI), position = position_dodge(0.9), width = 0.3) +
+  facet_wrap(~year) +
+  labs(
+    x = "Lagoon", 
+    y = expression(Mean~Density~of~Fish~Recruits~(per~1~m^2~of~microhabitat)),
+    title = "Mean Density of Recruited Coral Trout at Rarotonga and Aitutaki Lagoons in 2009 and 2018") +
+  scale_y_continuous(expand = c(0,0), limits = c(-1.6,15), breaks = seq(0,15,5)) +
+  scale_x_discrete(expand = c(0,0)) +
+  scale_fill_manual(name = "Lagoon", breaks = c("Aitutaki", "Rarotonga"), values = alpha(c("cornflowerblue", "mediumseagreen"), 0.75)) +
+  theme_bw() +
+  theme(text = element_text(family = "serif")) +
+  theme(plot.title = element_text(size = 12, hjust = 0.5, face = "bold")) +
+  theme(panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))
+
+coraltrout_recruit_plot  
+
+# Spotted Damselfish
+spotted_recruit <- recruited %>% 
+  filter(fish == "Spotted Damselfish") %>% 
+  filter(number != 0)
+
+spotted_recruit_plot <- ggplot(spotted_recruit, aes(x = location, y = number, fill = location)) +
+  geom_bar(stat = "identity", color = "black", position = "dodge") +
+  geom_errorbar(aes(ymin = number - CI, ymax = number + CI), position = position_dodge(0.9), width = 0.3) +
+  facet_wrap(~year) +
+  labs(
+    x = "Lagoon", 
+    y = expression(Mean~Density~of~Fish~Recruits~(per~1~m^2~of~microhabitat)),
+    title = "Mean Density of Recruited Spotted Damselfish at Rarotonga and Aitutaki Lagoons in 2009 and 2018") +
+  scale_y_continuous(expand = c(0,0), limits = c(0,21), breaks = seq(0,20,5)) +
+  scale_x_discrete(expand = c(0,0)) +
+  scale_fill_manual(name = "Lagoon", breaks = c("Aitutaki", "Rarotonga"), values = alpha(c("cornflowerblue", "mediumseagreen"), 0.75)) +
+  theme_bw() +
+  theme(text = element_text(family = "serif")) +
+  theme(plot.title = element_text(size = 12, hjust = 0.5, face = "bold")) +
+  theme(panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))
+
+spotted_recruit_plot 
+
+# Yellow Damselfish
+yellow_recruit <- recruited %>% 
+  filter(fish == "Yellow Damselfish") %>% 
+  filter(number != 0)
+
+yellow_recruit_plot <- ggplot(yellow_recruit, aes(x = location, y = number, fill = location)) +
+  geom_bar(stat = "identity", color = "black", position = "dodge") +
+  geom_errorbar(aes(ymin = number - CI, ymax = number + CI), position = position_dodge(0.9), width = 0.3) +
+  facet_wrap(~year) +
+  labs(
+    x = "Lagoon", 
+    y = expression(Mean~Density~of~Fish~Recruits~(per~1~m^2~of~microhabitat)),
+    title = "Mean Density of Recruited Yellow Damselfish at Rarotonga and Aitutaki Lagoons in 2009 and 2018") +
+  scale_y_continuous(expand = c(0,0), limits = c(0,52), breaks = seq(0,50,10)) +
+  scale_x_discrete(expand = c(0,0)) +
+  scale_fill_manual(name = "Lagoon", breaks = c("Aitutaki", "Rarotonga"), values = alpha(c("cornflowerblue", "mediumseagreen"), 0.75)) +
+  theme_bw() +
+  theme(text = element_text(family = "serif")) +
+  theme(plot.title = element_text(size = 12, hjust = 0.5, face = "bold")) +
+  theme(panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))
+
+yellow_recruit_plot 
 
 ```
+In Rarotonga, recruited Coral Trout significantly decreased from 2009 to 2018.
+
+There were significantly more recruited Yellow Damselfish in Rarotonga compared to Aitutaki in both 2009 and 2018. In both Aitutaki and Rarotonga, recruited Yellow Damselfish significantly increased from 2009 to 2018.
+
 
 ####3. Density of Fish Recruits per 100m^2 Area of Reef
 
 Use data sets I and II to calculate the density of fish recruits per 100 m2 area of reef. Note that the density of fish recruits is given as the number per 1 m2 of microhabitat, so you will need to figure out how to calculate the density of recruits per 100 m2 of reef area (not all of which is covered by the microhabitat occupied by the fish). For each fish species, make an XY Scatter plot to reveal the relationship between the density (per 100 m2 for reef area) of recruits and adults. Each place and time will be 1 data point, so each graph will have 4 data points. Add a linear trend line to each plot (select a graph, on Tool Bar press ‘Insert’ then ‘Trendline’, select ‘Trend/Regression Type’ = ‘Linear’, select options, check box ‘Display R-square Value on Chart’, press ‘OK’). Label the axes. Which species show correlations in adult and recruit densities and what are those relationships?
 
-```{r}
+```{r #3}
+
+# Multiply number of fish recruits per 1 m2 of microhabitat by the density of "other organisms" (microhabitat) per 100 m2 of reef area to get the density of fish recruits per 100 m2 of reef area
+
+# Surgeonfish (microhabitat = Fine-branching Coral)
+finecoral
+
+# Coral Trout (microhabitat = Coarse-branching Coral)
+coarsecoral
+
+# Spotted Damselfish (microhabitat = Sea Anemones)
+anemone
+
+# Yellow Damselfish (microhabitat = Mounding Coral)
+moundingcoral
+
 
 ```
+
 
 ####4. Relationship between density of adults and density of microhabitat used by young
 
 For each species of fish, make an ‘XY Scatter’ plot (with linear trend line and R-square value) of the relationship between density of adults and density of microhabitat used by their young. (You need to
 make 4 different plots, 1 per fish species.) Which show a relationship? What are the trends?
 
-```{r}
-
-```
 
 ####5. Density of adults per area of microhabitat used by young
 
 For each species of fish, calculate for each year and lagoon the density of adults per area of bottom covered by the microhabitat used by the young. For each species of fish, make a histogram of the mean density of adults per area of juvenile microhabitat (use the same graphing method as in Question 1; you will need to make 4 different graphs, 1 per species of fish). Which species show apparent differences in the density of adults per area of juvenile microhabitat between Rarotonga and Aitutaki and between years? (Do not concern yourself with the 95% CI for these comparisons, just look to see which, if any, appear extremely different.) What are those trends?
 
-```{r}
-
-```
 
 ####6. Compare densities of adults
 
 For each pair of fish species, make an ‘XY(Scatter)’ plot (with linear trend line and R-square value) for the densities of adults (i.e., plot the densities of one species against another; you need to make 6 different graphs). Which show patterns and what are those trends?
-
-```{r}
-
-```
 
