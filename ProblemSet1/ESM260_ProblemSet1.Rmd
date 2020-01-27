@@ -8,3 +8,277 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+```{r packages, include=FALSE}
+
+# Load necessary packages
+library(tidyverse)
+
+```
+
+```{r data, include=False}
+
+# Read in data
+density <- read_csv("density_organisms.csv")
+recruited <- read_csv("recruited_fish.csv")
+
+```
+
+####1. Mean Density of Adult Fish
+
+For data set I (Mean Density of Adults) compare and contrast changes in the Rarotongan and Aitutaki Lagoons since 2009. For each organism, make a histogram that displays the mean density of the organism (y-axis) at Rarotonga and Aitutaki for 2009 and for 2018. Add the 95% confidence intervals to each graph. In your narrative, state which organisms that showed a statistically significant difference in density between Rarotonga and Aitutaki, and which showed a statistically significant difference between 2009 and 2019. State what the trends are. For now, we’ll adopt the convention that 2 means are statistically different if the mean of each is not included in the 95% confidence interval of the other mean.
+
+```{r #1, echo=FALSE, message=FALSE}
+
+# Create bar charts for each organism that displays the mean density of the organism (y-axis) at Rarotonga and Aitutaki for 2009 and 2018. Add the 95% confidence intervals to each graph.
+
+# Surgeonfish
+surgeonfish <- density %>% 
+  filter(organism == "Surgeonfish")
+
+surgeonfish_plot <- ggplot(surgeonfish, aes(x = location, y = density, fill = location)) +
+  geom_bar(stat = "identity", color = "black", position = "dodge") +
+  geom_errorbar(aes(ymin = density - CI, ymax = density + CI), position = position_dodge(0.9), width = 0.3) +
+  facet_wrap(~year) +
+  labs(
+    x = "Lagoon", 
+    y = expression(Mean~Density~of~Adult~Organisms~(per~100~m^2)),
+    title = "Mean Density of Adult Surgeonfish at Rarotonga and Aitutaki Lagoons in 2009 and 2018") +
+  scale_y_continuous(expand = c(0,0), limits = c(-20,450), breaks = seq(0,400,100)) +
+  scale_x_discrete(expand = c(0,0)) +
+  scale_fill_manual(name = "Lagoon", breaks = c("Aitutaki", "Rarotonga"), values = alpha(c("cornflowerblue", "mediumseagreen"), 0.75)) +
+  theme_bw() +
+  theme(text = element_text(family = "serif")) +
+  theme(plot.title = element_text(size = 12, hjust = 0.5, face = "bold")) +
+  theme(panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))
+
+surgeonfish_plot  
+
+# Coral Trout
+coraltrout <- density %>% 
+  filter(organism == "Coral Trout")
+
+coraltrout_plot <- ggplot(coraltrout, aes(x = location, y = density, fill = location)) +
+  geom_bar(stat = "identity", color = "black", position = "dodge") +
+  geom_errorbar(aes(ymin = density - CI, ymax = density + CI), position = position_dodge(0.9), width = 0.3) +
+  facet_wrap(~year) +
+  labs(
+    x = "Lagoon", 
+    y = expression(Mean~Density~of~Adult~Organisms~(per~100~m^2)),
+    title = "Mean Density of Adult Coral Trout at Rarotonga and Aitutaki Lagoons in 2009 and 2018") +
+  scale_y_continuous(expand = c(0,0), limits = c(-20,200), breaks = seq(0,200,50)) +
+  scale_x_discrete(expand = c(0,0)) +
+  scale_fill_manual(name = "Lagoon", breaks = c("Aitutaki", "Rarotonga"), values = alpha(c("cornflowerblue", "mediumseagreen"), 0.75)) +
+  theme_bw() +
+  theme(text = element_text(family = "serif")) +
+  theme(plot.title = element_text(size = 12, hjust = 0.5, face = "bold")) +
+  theme(panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))
+
+coraltrout_plot
+
+# Spotted Damselfish
+spotteddamselfish <- density %>% 
+  filter(organism == "Spotted Damselfish")
+
+spotteddamselfish_plot <- ggplot(spotteddamselfish, aes(x = location, y = density, fill = location)) +
+  geom_bar(stat = "identity", color = "black", position = "dodge") +
+  geom_errorbar(aes(ymin = density - CI, ymax = density + CI), position = position_dodge(0.9), width = 0.3) +
+  facet_wrap(~year) +
+  labs(
+    x = "Lagoon", 
+    y = expression(Mean~Density~of~Adult~Organisms~(per~100~m^2)),
+    title = "Mean Density of Adult Spotted Damselfish at Rarotonga and Aitutaki Lagoons in 2009 and 2018") +
+  scale_y_continuous(expand = c(0,0), limits = c(-40,1000), breaks = seq(0,1000,200)) +
+  scale_x_discrete(expand = c(0,0)) +
+  scale_fill_manual(name = "Lagoon", breaks = c("Aitutaki", "Rarotonga"), values = alpha(c("cornflowerblue", "mediumseagreen"), 0.75)) +
+  theme_bw() +
+  theme(text = element_text(family = "serif")) +
+  theme(plot.title = element_text(size = 12, hjust = 0.5, face = "bold")) +
+  theme(panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))
+
+spotteddamselfish_plot
+
+# Yellow Damselfish
+yellowdamselfish <- density %>% 
+  filter(organism == "Yellow Damselfish")
+
+yellowdamselfish_plot <- ggplot(yellowdamselfish, aes(x = location, y = density, fill = location)) +
+  geom_bar(stat = "identity", color = "black", position = "dodge") +
+  geom_errorbar(aes(ymin = density - CI, ymax = density + CI), position = position_dodge(0.9), width = 0.3) +
+  facet_wrap(~year) +
+  labs(
+    x = "Lagoon", 
+    y = expression(Mean~Density~of~Adult~Organisms~(per~100~m^2)),
+    title = "Mean Density of Adult Yellow Damselfish at Rarotonga and Aitutaki Lagoons in 2009 and 2018") +
+  scale_y_continuous(expand = c(0,0), limits = c(0,110), breaks = seq(0,100,20)) +
+  scale_x_discrete(expand = c(0,0)) +
+  scale_fill_manual(name = "Lagoon", breaks = c("Aitutaki", "Rarotonga"), values = alpha(c("cornflowerblue", "mediumseagreen"), 0.75)) +
+  theme_bw() +
+  theme(text = element_text(family = "serif")) +
+  theme(plot.title = element_text(size = 12, hjust = 0.5, face = "bold")) +
+  theme(panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))
+
+yellowdamselfish_plot
+
+# Mounding Corals
+moundingcoral <- density %>% 
+  filter(organism == "Mounding Corals")
+
+moundingcoral_plot <- ggplot(moundingcoral, aes(x = location, y = density, fill = location)) +
+  geom_bar(stat = "identity", color = "black", position = "dodge") +
+  geom_errorbar(aes(ymin = density - CI, ymax = density + CI), position = position_dodge(0.9), width = 0.3) +
+  facet_wrap(~year) +
+  labs(
+    x = "Lagoon", 
+    y = expression(Mean~Density~of~Adult~Organisms~(per~100~m^2)),
+    title = "Mean Density of Mounding Corals at Rarotonga and Aitutaki Lagoons in 2009 and 2018") +
+  scale_y_continuous(expand = c(0,0), limits = c(0,25), breaks = seq(0,25,5)) +
+  scale_x_discrete(expand = c(0,0)) +
+  scale_fill_manual(name = "Lagoon", breaks = c("Aitutaki", "Rarotonga"), values = alpha(c("cornflowerblue", "mediumseagreen"), 0.75)) +
+  theme_bw() +
+  theme(text = element_text(family = "serif")) +
+  theme(plot.title = element_text(size = 12, hjust = 0.5, face = "bold")) +
+  theme(panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))
+
+moundingcoral_plot
+
+# Coarse-branching Corals
+coarsecoral <- density %>% 
+  filter(organism == "Coarse-branching Corals")
+
+coarsecoral_plot <- ggplot(coarsecoral, aes(x = location, y = density, fill = location)) +
+  geom_bar(stat = "identity", color = "black", position = "dodge") +
+  geom_errorbar(aes(ymin = density - CI, ymax = density + CI), position = position_dodge(0.9), width = 0.3) +
+  facet_wrap(~year) +
+  labs(
+    x = "Lagoon", 
+    y = expression(Mean~Density~of~Adult~Organisms~(per~100~m^2)),
+    title = "Mean Density of Coarse-branching Corals at Rarotonga and Aitutaki Lagoons in 2009 and 2018") +
+  scale_y_continuous(expand = c(0,0), limits = c(0,4), breaks = seq(0,4,1)) +
+  scale_x_discrete(expand = c(0,0)) +
+  scale_fill_manual(name = "Lagoon", breaks = c("Aitutaki", "Rarotonga"), values = alpha(c("cornflowerblue", "mediumseagreen"), 0.75)) +
+  theme_bw() +
+  theme(text = element_text(family = "serif")) +
+  theme(plot.title = element_text(size = 12, hjust = 0.5, face = "bold")) +
+  theme(panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))
+
+coarsecoral_plot
+
+# Fine-branching Corals
+finecoral <- density %>% 
+  filter(organism == "Fine-branching Corals")
+
+finecoral_plot <- ggplot(finecoral, aes(x = location, y = density, fill = location)) +
+  geom_bar(stat = "identity", color = "black", position = "dodge") +
+  geom_errorbar(aes(ymin = density - CI, ymax = density + CI), position = position_dodge(0.9), width = 0.3) +
+  facet_wrap(~year) +
+  labs(
+    x = "Lagoon", 
+    y = expression(Mean~Density~of~Adult~Organisms~(per~100~m^2)),
+    title = "Mean Density of Fine-branching Corals at Rarotonga and Aitutaki Lagoons in 2009 and 2018") +
+  scale_y_continuous(expand = c(0,0), limits = c(-0.7,4.3), breaks = seq(0,4,1)) +
+  scale_x_discrete(expand = c(0,0)) +
+  scale_fill_manual(name = "Lagoon", breaks = c("Aitutaki", "Rarotonga"), values = alpha(c("cornflowerblue", "mediumseagreen"), 0.75)) +
+  theme_bw() +
+  theme(text = element_text(family = "serif")) +
+  theme(plot.title = element_text(size = 12, hjust = 0.5, face = "bold")) +
+  theme(panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))
+
+finecoral_plot
+
+# Sea Anemones
+anemone <- density %>% 
+  filter(organism == "Sea Anemones")
+
+anemone_plot <- ggplot(anemone, aes(x = location, y = density, fill = location)) +
+  geom_bar(stat = "identity", color = "black", position = "dodge") +
+  geom_errorbar(aes(ymin = density - CI, ymax = density + CI), position = position_dodge(0.9), width = 0.3) +
+  facet_wrap(~year) +
+  labs(
+    x = "Lagoon", 
+    y = expression(Mean~Density~of~Adult~Organisms~(per~100~m^2)),
+    title = "Mean Density of Sea Anemones at Rarotonga and Aitutaki Lagoons in 2009 and 2018") +
+  scale_y_continuous(expand = c(0,0), limits = c(0,2), breaks = seq(0,2,0.5)) +
+  scale_x_discrete(expand = c(0,0)) +
+  scale_fill_manual(name = "Lagoon", breaks = c("Aitutaki", "Rarotonga"), values = alpha(c("cornflowerblue", "mediumseagreen"), 0.75)) +
+  theme_bw() +
+  theme(text = element_text(family = "serif")) +
+  theme(plot.title = element_text(size = 12, hjust = 0.5, face = "bold")) +
+  theme(panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))
+
+anemone_plot
+
+# Algae
+algae <- density %>% 
+  filter(organism == "Algae")
+
+algae_plot <- ggplot(algae, aes(x = location, y = density, fill = location)) +
+  geom_bar(stat = "identity", color = "black", position = "dodge") +
+  geom_errorbar(aes(ymin = density - CI, ymax = density + CI), position = position_dodge(0.9), width = 0.3) +
+  facet_wrap(~year) +
+  labs(
+    x = "Lagoon", 
+    y = expression(Mean~Density~of~Adult~Organisms~(per~100~m^2)),
+    title = "Mean Density of Algae at Rarotonga and Aitutaki Lagoons in 2009 and 2018") +
+  scale_y_continuous(expand = c(0,0), limits = c(-0.5,6.5), breaks = seq(0,6,2)) +
+  scale_x_discrete(expand = c(0,0)) +
+  scale_fill_manual(name = "Lagoon", breaks = c("Aitutaki", "Rarotonga"), values = alpha(c("cornflowerblue", "mediumseagreen"), 0.75)) +
+  theme_bw() +
+  theme(text = element_text(family = "serif")) +
+  theme(plot.title = element_text(size = 12, hjust = 0.5, face = "bold")) +
+  theme(panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))
+
+algae_plot
+
+```
+
+####2. Mean Density of Recruited Young Fish
+
+Do the same as in Question 1 for the recruits (young) of each fish species.
+
+```{r}
+
+```
+
+####3. Density of Fish Recruits per 100m^2 Area of Reef
+
+Use data sets I and II to calculate the density of fish recruits per 100 m2 area of reef. Note that the density of fish recruits is given as the number per 1 m2 of microhabitat, so you will need to figure out how to calculate the density of recruits per 100 m2 of reef area (not all of which is covered by the microhabitat occupied by the fish). For each fish species, make an XY Scatter plot to reveal the relationship between the density (per 100 m2 for reef area) of recruits and adults. Each place and time will be 1 data point, so each graph will have 4 data points. Add a linear trend line to each plot (select a graph, on Tool Bar press ‘Insert’ then ‘Trendline’, select ‘Trend/Regression Type’ = ‘Linear’, select options, check box ‘Display R-square Value on Chart’, press ‘OK’). Label the axes. Which species show correlations in adult and recruit densities and what are those relationships?
+
+```{r}
+
+```
+
+####4. Relationship between density of adults and density of microhabitat used by young
+
+For each species of fish, make an ‘XY Scatter’ plot (with linear trend line and R-square value) of the relationship between density of adults and density of microhabitat used by their young. (You need to
+make 4 different plots, 1 per fish species.) Which show a relationship? What are the trends?
+
+```{r}
+
+```
+
+####5. Density of adults per area of microhabitat used by young
+
+For each species of fish, calculate for each year and lagoon the density of adults per area of bottom covered by the microhabitat used by the young. For each species of fish, make a histogram of the mean density of adults per area of juvenile microhabitat (use the same graphing method as in Question 1; you will need to make 4 different graphs, 1 per species of fish). Which species show apparent differences in the density of adults per area of juvenile microhabitat between Rarotonga and Aitutaki and between years? (Do not concern yourself with the 95% CI for these comparisons, just look to see which, if any, appear extremely different.) What are those trends?
+
+```{r}
+
+```
+
+####6. Compare densities of adults
+
+For each pair of fish species, make an ‘XY(Scatter)’ plot (with linear trend line and R-square value) for the densities of adults (i.e., plot the densities of one species against another; you need to make 6 different graphs). Which show patterns and what are those trends?
+
+```{r}
+
+```
+
