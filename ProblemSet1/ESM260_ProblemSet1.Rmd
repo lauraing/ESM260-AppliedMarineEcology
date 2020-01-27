@@ -367,20 +367,124 @@ Use data sets I and II to calculate the density of fish recruits per 100 m2 area
 # Multiply number of fish recruits per 1 m2 of microhabitat by the density of "other organisms" (microhabitat) per 100 m2 of reef area to get the density of fish recruits per 100 m2 of reef area
 
 # Surgeonfish (microhabitat = Fine-branching Coral)
-finecoral
+surgeonfish_recruit_density <- (surgeonfish_recruit$number * finecoral$density)
+
+surgeonfish_all <- cbind(surgeonfish_recruit_density, surgeonfish)
+
+surgeonfish_r2 <- surgeonfish_all %>% 
+  summarize(R2 = summary(lm(surgeonfish_recruit_density ~ density))$r.squared)
+# R2 = 0.96754
+
+# Create XY scatter plot of density of recruits and adults
+surgeonfish_all_plot <- ggplot(surgeonfish_all, aes(
+                                                    x = surgeonfish_recruit_density, 
+                                                    y = density)) +
+  geom_smooth(method = lm, se = F, color = "slategrey") +
+  geom_point(size = 5, aes(color = location, shape = factor(year))) +
+  labs(
+    x = expression(Density~of~Fish~Recruits~(per~100~m^2~of~reef~area)), 
+    y = expression(Density~of~Adult~Fish~(per~100~m^2~of~reef~area)),
+    title = expression(Density~of~Surgeonfish~Recruits~and~Adults~per~100~m^2~of~reef~area),
+    color = "Lagoon",
+    shape = "Year")+
+  theme_bw() +
+  theme(text = element_text(family = "serif")) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
+  theme(panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))
+
+surgeonfish_all_plot
 
 # Coral Trout (microhabitat = Coarse-branching Coral)
-coarsecoral
+coraltrout_recruit_density <- (coraltrout_recruit$number * coarsecoral$density)
+
+coraltrout_all <- cbind(coraltrout_recruit_density, coraltrout)
+
+coraltrout_r2 <- coraltrout_all %>% 
+  summarize(R2 = summary(lm(coraltrout_recruit_density ~ density))$r.squared)
+# R2 = 0.8957753
+
+# Create XY scatter plot of density of recruits and adults
+coraltrout_all_plot <- ggplot(coraltrout_all, aes(
+                                                    x = coraltrout_recruit_density, 
+                                                    y = density)) +
+  geom_smooth(method = lm, se = F, color = "slategrey") +
+  geom_point(size = 5, aes(color = location, shape = factor(year))) +
+  labs(
+    x = expression(Density~of~Fish~Recruits~(per~100~m^2~of~reef~area)), 
+    y = expression(Density~of~Adult~Fish~(per~100~m^2~of~reef~area)),
+    title = expression(Density~of~Coral~Trout~Recruits~and~Adults~per~100~m^2~of~reef~area),
+    color = "Lagoon",
+    shape = "Year")+
+  theme_bw() +
+  theme(text = element_text(family = "serif")) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
+  theme(panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))
+
+coraltrout_all_plot
 
 # Spotted Damselfish (microhabitat = Sea Anemones)
-anemone
+spotted_recruit_density <- (spotted_recruit$number * anemone$density)
+
+spotted_all <- cbind(spotted_recruit_density, spotteddamselfish)
+
+spotted_r2 <- spotted_all %>% 
+  summarize(R2 = summary(lm(spotted_recruit_density ~ density))$r.squared)
+# R2 = 0.9434432
+
+# Create XY scatter plot of density of recruits and adults
+spotted_all_plot <- ggplot(spotted_all, aes(
+                                            x = spotted_recruit_density, 
+                                            y = density)) +
+  geom_smooth(method = lm, se = F, color = "slategrey") +
+  geom_point(size = 5, aes(color = location, shape = factor(year))) +
+  labs(
+    x = expression(Density~of~Fish~Recruits~(per~100~m^2~of~reef~area)), 
+    y = expression(Density~of~Adult~Fish~(per~100~m^2~of~reef~area)),
+    title = expression(Density~of~Spotted~Damselfish~Recruits~and~Adults~per~100~m^2~of~reef~area),
+    color = "Lagoon",
+    shape = "Year")+
+  theme_bw() +
+  theme(text = element_text(family = "serif")) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
+  theme(panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))
+
+spotted_all_plot
 
 # Yellow Damselfish (microhabitat = Mounding Coral)
-moundingcoral
+yellow_recruit_density <- (yellow_recruit$number * moundingcoral$density)
+
+yellow_all <- cbind(yellow_recruit_density, yellowdamselfish)
+
+yellow_r2 <- yellow_all %>% 
+  summarize(R2 = summary(lm(yellow_recruit_density ~ density))$r.squared)
+# R2 = 0.401724
+
+# Create XY scatter plot of density of recruits and adults
+yellow_all_plot <- ggplot(yellow_all, aes(
+                                          x = spotted_recruit_density, 
+                                          y = density)) +
+  geom_smooth(method = lm, se = F, color = "slategrey") +
+  geom_point(size = 5, aes(color = location, shape = factor(year))) +
+  labs(
+    x = expression(Density~of~Fish~Recruits~(per~100~m^2~of~reef~area)), 
+    y = expression(Density~of~Adult~Fish~(per~100~m^2~of~reef~area)),
+    title = expression(Density~of~Yellow~Damselfish~Recruits~and~Adults~per~100~m^2~of~reef~area),
+    color = "Lagoon",
+    shape = "Year")+
+  theme_bw() +
+  theme(text = element_text(family = "serif")) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
+  theme(panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))
+
+yellow_all_plot
 
 
 ```
-
+Surgeonfish, Coral Trout, and Spotted Damselfish all show a strong position correlation in adult and recruit densities. Yellow Damselfish shows a weaker negative correlation in adult and recruit densities.
 
 ####4. Relationship between density of adults and density of microhabitat used by young
 
