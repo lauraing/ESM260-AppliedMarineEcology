@@ -2,7 +2,9 @@
 title: "ESM 260 - Problem Set 1"
 author: "Laura Ingulsrud"
 date: "1/26/2020"
-output: html_document
+output:
+  word_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -13,6 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Load necessary packages
 library(tidyverse)
+library(sanzo)
 
 ```
 
@@ -33,208 +36,226 @@ For data set I (Mean Density of Adults) compare and contrast changes in the Raro
 
 # Create bar charts for each organism that displays the mean density of the organism (y-axis) at Rarotonga and Aitutaki for 2009 and 2018. Add the 95% confidence intervals to each graph.
 
-# Surgeonfish
+################# Surgeonfish #################
+
 surgeonfish <- density %>% 
   filter(organism == "Surgeonfish")
 
 surgeonfish_plot <- ggplot(surgeonfish, aes(x = location, y = density, fill = location)) +
-  geom_bar(stat = "identity", color = "black", position = "dodge") +
+  geom_bar(stat = "identity", color = "black", position = "dodge", alpha = 0.9) +
   geom_errorbar(aes(ymin = density - CI, ymax = density + CI), position = position_dodge(0.9), width = 0.3) +
   facet_wrap(~year) +
   labs(
     x = "Lagoon", 
     y = expression(Mean~Density~of~Adult~Organisms~(per~100~m^2)),
-    title = "Mean Density of Adult Surgeonfish at Rarotonga and Aitutaki Lagoons in 2009 and 2018") +
+    title = "Mean Density of Adult Surgeonfish") +
   scale_y_continuous(expand = c(0,0), limits = c(-20,450), breaks = seq(0,400,100)) +
   scale_x_discrete(expand = c(0,0)) +
-  scale_fill_manual(name = "Lagoon", breaks = c("Aitutaki", "Rarotonga"), values = alpha(c("cornflowerblue", "mediumseagreen"), 0.75)) +
+  scale_fill_manual(values = (sanzo.duo("c074"))) +
   theme_bw() +
+  theme(legend.position = "none") +
   theme(text = element_text(family = "serif")) +
-  theme(plot.title = element_text(size = 12, hjust = 0.5, face = "bold")) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
   theme(panel.background = element_blank(),
         axis.line = element_line(colour = "black"))
 
 surgeonfish_plot  
 
-# Coral Trout
+################# Coral Trout #################
+
 coraltrout <- density %>% 
   filter(organism == "Coral Trout")
 
 coraltrout_plot <- ggplot(coraltrout, aes(x = location, y = density, fill = location)) +
-  geom_bar(stat = "identity", color = "black", position = "dodge") +
+  geom_bar(stat = "identity", color = "black", position = "dodge", alpha = 0.9) +
   geom_errorbar(aes(ymin = density - CI, ymax = density + CI), position = position_dodge(0.9), width = 0.3) +
   facet_wrap(~year) +
   labs(
     x = "Lagoon", 
     y = expression(Mean~Density~of~Adult~Organisms~(per~100~m^2)),
-    title = "Mean Density of Adult Coral Trout at Rarotonga and Aitutaki Lagoons in 2009 and 2018") +
+    title = "Mean Density of Adult Coral Trout") +
   scale_y_continuous(expand = c(0,0), limits = c(-20,200), breaks = seq(0,200,50)) +
   scale_x_discrete(expand = c(0,0)) +
-  scale_fill_manual(name = "Lagoon", breaks = c("Aitutaki", "Rarotonga"), values = alpha(c("cornflowerblue", "mediumseagreen"), 0.75)) +
+  scale_fill_manual(values = (sanzo.duo("c074"))) +
   theme_bw() +
+  theme(legend.position = "none") +
   theme(text = element_text(family = "serif")) +
-  theme(plot.title = element_text(size = 12, hjust = 0.5, face = "bold")) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
   theme(panel.background = element_blank(),
         axis.line = element_line(colour = "black"))
 
 coraltrout_plot
 
-# Spotted Damselfish
+################# Spotted Damselfish #################
+
 spotteddamselfish <- density %>% 
   filter(organism == "Spotted Damselfish")
 
 spotteddamselfish_plot <- ggplot(spotteddamselfish, aes(x = location, y = density, fill = location)) +
-  geom_bar(stat = "identity", color = "black", position = "dodge") +
+  geom_bar(stat = "identity", color = "black", position = "dodge", alpha = 0.9) +
   geom_errorbar(aes(ymin = density - CI, ymax = density + CI), position = position_dodge(0.9), width = 0.3) +
   facet_wrap(~year) +
   labs(
     x = "Lagoon", 
     y = expression(Mean~Density~of~Adult~Organisms~(per~100~m^2)),
-    title = "Mean Density of Adult Spotted Damselfish at Rarotonga and Aitutaki Lagoons in 2009 and 2018") +
+    title = "Mean Density of Adult Spotted Damselfish") +
   scale_y_continuous(expand = c(0,0), limits = c(-40,1000), breaks = seq(0,1000,200)) +
   scale_x_discrete(expand = c(0,0)) +
-  scale_fill_manual(name = "Lagoon", breaks = c("Aitutaki", "Rarotonga"), values = alpha(c("cornflowerblue", "mediumseagreen"), 0.75)) +
+  scale_fill_manual(values = (sanzo.duo("c074"))) +
   theme_bw() +
+  theme(legend.position = "none") +
   theme(text = element_text(family = "serif")) +
-  theme(plot.title = element_text(size = 12, hjust = 0.5, face = "bold")) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
   theme(panel.background = element_blank(),
         axis.line = element_line(colour = "black"))
 
 spotteddamselfish_plot
 
-# Yellow Damselfish
+################# Yellow Damselfish #################
+
 yellowdamselfish <- density %>% 
   filter(organism == "Yellow Damselfish")
 
 yellowdamselfish_plot <- ggplot(yellowdamselfish, aes(x = location, y = density, fill = location)) +
-  geom_bar(stat = "identity", color = "black", position = "dodge") +
+  geom_bar(stat = "identity", color = "black", position = "dodge", alpha = 0.9) +
   geom_errorbar(aes(ymin = density - CI, ymax = density + CI), position = position_dodge(0.9), width = 0.3) +
   facet_wrap(~year) +
   labs(
     x = "Lagoon", 
     y = expression(Mean~Density~of~Adult~Organisms~(per~100~m^2)),
-    title = "Mean Density of Adult Yellow Damselfish at Rarotonga and Aitutaki Lagoons in 2009 and 2018") +
+    title = "Mean Density of Adult Yellow Damselfish") +
   scale_y_continuous(expand = c(0,0), limits = c(0,110), breaks = seq(0,100,20)) +
   scale_x_discrete(expand = c(0,0)) +
-  scale_fill_manual(name = "Lagoon", breaks = c("Aitutaki", "Rarotonga"), values = alpha(c("cornflowerblue", "mediumseagreen"), 0.75)) +
+  scale_fill_manual(values = (sanzo.duo("c074"))) +
   theme_bw() +
+  theme(legend.position = "none") +
   theme(text = element_text(family = "serif")) +
-  theme(plot.title = element_text(size = 12, hjust = 0.5, face = "bold")) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
   theme(panel.background = element_blank(),
         axis.line = element_line(colour = "black"))
 
 yellowdamselfish_plot
 
-# Mounding Corals
+################# Mounding Corals #################
+
 moundingcoral <- density_other %>% 
   filter(organism == "Mounding Corals")
 
 moundingcoral_plot <- ggplot(moundingcoral, aes(x = location, y = density_habitat, fill = location)) +
-  geom_bar(stat = "identity", color = "black", position = "dodge") +
+  geom_bar(stat = "identity", color = "black", position = "dodge", alpha = 0.9) +
   geom_errorbar(aes(ymin = density_habitat - CI, ymax = density_habitat + CI), position = position_dodge(0.9), width = 0.3) +
   facet_wrap(~year) +
   labs(
     x = "Lagoon", 
     y = expression(Mean~Density~of~Adult~Organisms~(per~100~m^2)),
-    title = "Mean Density of Mounding Corals at Rarotonga and Aitutaki Lagoons in 2009 and 2018") +
+    title = "Mean Density of Mounding Corals") +
   scale_y_continuous(expand = c(0,0), limits = c(0,25), breaks = seq(0,25,5)) +
   scale_x_discrete(expand = c(0,0)) +
-  scale_fill_manual(name = "Lagoon", breaks = c("Aitutaki", "Rarotonga"), values = alpha(c("coral", "goldenrod2"), 0.75)) +
+  scale_fill_manual(values = (sanzo.duo("c102"))) +
   theme_bw() +
+  theme(legend.position = "none") +
   theme(text = element_text(family = "serif")) +
-  theme(plot.title = element_text(size = 12, hjust = 0.5, face = "bold")) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
   theme(panel.background = element_blank(),
         axis.line = element_line(colour = "black"))
 
 moundingcoral_plot
 
-# Coarse-branching Corals
+################# Coarse-branching Corals #################
+
 coarsecoral <- density_other %>% 
   filter(organism == "Coarse-branching Corals")
 
 coarsecoral_plot <- ggplot(coarsecoral, aes(x = location, y = density_habitat, fill = location)) +
-  geom_bar(stat = "identity", color = "black", position = "dodge") +
+  geom_bar(stat = "identity", color = "black", position = "dodge", alpha = 0.9) +
   geom_errorbar(aes(ymin = density_habitat - CI, ymax = density_habitat + CI), position = position_dodge(0.9), width = 0.3) +
   facet_wrap(~year) +
   labs(
     x = "Lagoon", 
     y = expression(Mean~Density~of~Adult~Organisms~(per~100~m^2)),
-    title = "Mean Density of Coarse-branching Corals at Rarotonga and Aitutaki Lagoons in 2009 and 2018") +
+    title = "Mean Density of Coarse-branching Corals") +
   scale_y_continuous(expand = c(0,0), limits = c(0,4), breaks = seq(0,4,1)) +
   scale_x_discrete(expand = c(0,0)) +
-  scale_fill_manual(name = "Lagoon", breaks = c("Aitutaki", "Rarotonga"), values = alpha(c("coral", "goldenrod2"), 0.75)) +
+  scale_fill_manual(values = (sanzo.duo("c102"))) +
   theme_bw() +
+  theme(legend.position = "none") +
   theme(text = element_text(family = "serif")) +
-  theme(plot.title = element_text(size = 12, hjust = 0.5, face = "bold")) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
   theme(panel.background = element_blank(),
         axis.line = element_line(colour = "black"))
 
 coarsecoral_plot
 
-# Fine-branching Corals
+################# Fine-branching Corals #################
+
 finecoral <- density_other %>% 
   filter(organism == "Fine-branching Corals")
 
 finecoral_plot <- ggplot(finecoral, aes(x = location, y = density_habitat, fill = location)) +
-  geom_bar(stat = "identity", color = "black", position = "dodge") +
+  geom_bar(stat = "identity", color = "black", position = "dodge", alpha = 0.9) +
   geom_errorbar(aes(ymin = density_habitat - CI, ymax = density_habitat + CI), position = position_dodge(0.9), width = 0.3) +
   facet_wrap(~year) +
   labs(
     x = "Lagoon", 
     y = expression(Mean~Density~of~Adult~Organisms~(per~100~m^2)),
-    title = "Mean Density of Fine-branching Corals at Rarotonga and Aitutaki Lagoons in 2009 and 2018") +
+    title = "Mean Density of Fine-branching Corals") +
   scale_y_continuous(expand = c(0,0), limits = c(-0.7,4.3), breaks = seq(0,4,1)) +
   scale_x_discrete(expand = c(0,0)) +
-  scale_fill_manual(name = "Lagoon", breaks = c("Aitutaki", "Rarotonga"), values = alpha(c("coral", "goldenrod2"), 0.75)) +
+  scale_fill_manual(values = (sanzo.duo("c102"))) +
   theme_bw() +
+  theme(legend.position = "none") +
   theme(text = element_text(family = "serif")) +
-  theme(plot.title = element_text(size = 12, hjust = 0.5, face = "bold")) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
   theme(panel.background = element_blank(),
         axis.line = element_line(colour = "black"))
 
 finecoral_plot
 
-# Sea Anemones
+################# Sea Anemones #################
+
 anemone <- density_other %>% 
   filter(organism == "Sea Anemones")
 
 anemone_plot <- ggplot(anemone, aes(x = location, y = density_habitat, fill = location)) +
-  geom_bar(stat = "identity", color = "black", position = "dodge") +
+  geom_bar(stat = "identity", color = "black", position = "dodge", alpha = 0.9) +
   geom_errorbar(aes(ymin = density_habitat - CI, ymax = density_habitat + CI), position = position_dodge(0.9), width = 0.3) +
   facet_wrap(~year) +
   labs(
     x = "Lagoon", 
     y = expression(Mean~Density~of~Adult~Organisms~(per~100~m^2)),
-    title = "Mean Density of Sea Anemones at Rarotonga and Aitutaki Lagoons in 2009 and 2018") +
+    title = "Mean Density of Sea Anemones") +
   scale_y_continuous(expand = c(0,0), limits = c(0,2), breaks = seq(0,2,0.5)) +
   scale_x_discrete(expand = c(0,0)) +
-  scale_fill_manual(name = "Lagoon", breaks = c("Aitutaki", "Rarotonga"), values = alpha(c("coral", "goldenrod2"), 0.75)) +
+  scale_fill_manual(values = (sanzo.duo("c102"))) +
   theme_bw() +
+  theme(legend.position = "none") +
   theme(text = element_text(family = "serif")) +
-  theme(plot.title = element_text(size = 12, hjust = 0.5, face = "bold")) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
   theme(panel.background = element_blank(),
         axis.line = element_line(colour = "black"))
 
 anemone_plot
 
-# Algae
+################# Algae #################
+
 algae <- density_other %>% 
   filter(organism == "Algae")
 
 algae_plot <- ggplot(algae, aes(x = location, y = density_habitat, fill = location)) +
-  geom_bar(stat = "identity", color = "black", position = "dodge") +
+  geom_bar(stat = "identity", color = "black", position = "dodge", alpha = 0.9) +
   geom_errorbar(aes(ymin = density_habitat - CI, ymax = density_habitat + CI), position = position_dodge(0.9), width = 0.3) +
   facet_wrap(~year) +
   labs(
     x = "Lagoon", 
     y = expression(Mean~Density~of~Adult~Organisms~(per~100~m^2)),
-    title = "Mean Density of Algae at Rarotonga and Aitutaki Lagoons in 2009 and 2018") +
+    title = "Mean Density of Algae") +
   scale_y_continuous(expand = c(0,0), limits = c(-0.5,6.5), breaks = seq(0,6,2)) +
   scale_x_discrete(expand = c(0,0)) +
-  scale_fill_manual(name = "Lagoon", breaks = c("Aitutaki", "Rarotonga"), values = alpha(c("coral", "goldenrod2"), 0.75)) +
+  scale_fill_manual(values = (sanzo.duo("c102"))) +
   theme_bw() +
+  theme(legend.position = "none") +
   theme(text = element_text(family = "serif")) +
-  theme(plot.title = element_text(size = 12, hjust = 0.5, face = "bold")) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
   theme(panel.background = element_blank(),
         axis.line = element_line(colour = "black"))
 
@@ -257,97 +278,105 @@ Do the same as in Question 1 for the recruits (young) of each fish species.
 
 # Create bar charts for each recruit (young) of each fish species that displays the mean density of the organism (y-axis) at Rarotonga and Aitutaki for 2009 and 2018. Add the 95% confidence intervals to each graph.
 
-# Surgeonfish
+################# Surgeonfish #################
+
 surgeonfish_recruit <- recruited %>% 
   filter(fish == "Surgeonfish") %>% 
   filter(number != 0)
 
 surgeonfish_recruit_plot <- ggplot(surgeonfish_recruit, aes(x = location, y = number, fill = location)) +
-  geom_bar(stat = "identity", color = "black", position = "dodge") +
+  geom_bar(stat = "identity", color = "black", position = "dodge", alpha = 0.9) +
   geom_errorbar(aes(ymin = number - CI, ymax = number + CI), position = position_dodge(0.9), width = 0.3) +
   facet_wrap(~year) +
   labs(
     x = "Lagoon", 
     y = expression(Mean~Density~of~Fish~Recruits~(per~1~m^2~of~microhabitat)),
-    title = "Mean Density of Recruited Surgeonfish at Rarotonga and Aitutaki Lagoons in 2009 and 2018") +
+    title = "Mean Density of Recruited Surgeonfish") +
   scale_y_continuous(expand = c(0,0), limits = c(0,45), breaks = seq(0,45,10)) +
   scale_x_discrete(expand = c(0,0)) +
-  scale_fill_manual(name = "Lagoon", breaks = c("Aitutaki", "Rarotonga"), values = alpha(c("cornflowerblue", "mediumseagreen"), 0.75)) +
+  scale_fill_manual(values = (sanzo.duo("c047"))) +
   theme_bw() +
+  theme(legend.position = "none") +
   theme(text = element_text(family = "serif")) +
-  theme(plot.title = element_text(size = 12, hjust = 0.5, face = "bold")) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
   theme(panel.background = element_blank(),
         axis.line = element_line(colour = "black"))
 
 surgeonfish_recruit_plot  
 
-# Coral Trout
+################# Coral Trout #################
+
 coraltrout_recruit <- recruited %>% 
   filter(fish == "Coral Trout") %>% 
   filter(number != 0)
 
 coraltrout_recruit_plot <- ggplot(coraltrout_recruit, aes(x = location, y = number, fill = location)) +
-  geom_bar(stat = "identity", color = "black", position = "dodge") +
+  geom_bar(stat = "identity", color = "black", position = "dodge", alpha = 0.9) +
   geom_errorbar(aes(ymin = number - CI, ymax = number + CI), position = position_dodge(0.9), width = 0.3) +
   facet_wrap(~year) +
   labs(
     x = "Lagoon", 
     y = expression(Mean~Density~of~Fish~Recruits~(per~1~m^2~of~microhabitat)),
-    title = "Mean Density of Recruited Coral Trout at Rarotonga and Aitutaki Lagoons in 2009 and 2018") +
+    title = "Mean Density of Recruited Coral Trout") +
   scale_y_continuous(expand = c(0,0), limits = c(-1.6,15), breaks = seq(0,15,5)) +
   scale_x_discrete(expand = c(0,0)) +
-  scale_fill_manual(name = "Lagoon", breaks = c("Aitutaki", "Rarotonga"), values = alpha(c("cornflowerblue", "mediumseagreen"), 0.75)) +
+  scale_fill_manual(values = (sanzo.duo("c047"))) +
   theme_bw() +
+  theme(legend.position = "none") +
   theme(text = element_text(family = "serif")) +
-  theme(plot.title = element_text(size = 12, hjust = 0.5, face = "bold")) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
   theme(panel.background = element_blank(),
         axis.line = element_line(colour = "black"))
 
 coraltrout_recruit_plot  
 
-# Spotted Damselfish
+################# Spotted Damselfish #################
+
 spotted_recruit <- recruited %>% 
   filter(fish == "Spotted Damselfish") %>% 
   filter(number != 0)
 
 spotted_recruit_plot <- ggplot(spotted_recruit, aes(x = location, y = number, fill = location)) +
-  geom_bar(stat = "identity", color = "black", position = "dodge") +
+  geom_bar(stat = "identity", color = "black", position = "dodge", alpha = 0.9) +
   geom_errorbar(aes(ymin = number - CI, ymax = number + CI), position = position_dodge(0.9), width = 0.3) +
   facet_wrap(~year) +
   labs(
     x = "Lagoon", 
     y = expression(Mean~Density~of~Fish~Recruits~(per~1~m^2~of~microhabitat)),
-    title = "Mean Density of Recruited Spotted Damselfish at Rarotonga and Aitutaki Lagoons in 2009 and 2018") +
+    title = "Mean Density of Recruited Spotted Damselfish") +
   scale_y_continuous(expand = c(0,0), limits = c(0,21), breaks = seq(0,20,5)) +
   scale_x_discrete(expand = c(0,0)) +
-  scale_fill_manual(name = "Lagoon", breaks = c("Aitutaki", "Rarotonga"), values = alpha(c("cornflowerblue", "mediumseagreen"), 0.75)) +
+  scale_fill_manual(values = (sanzo.duo("c047"))) +
   theme_bw() +
+  theme(legend.position = "none") +
   theme(text = element_text(family = "serif")) +
-  theme(plot.title = element_text(size = 12, hjust = 0.5, face = "bold")) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
   theme(panel.background = element_blank(),
         axis.line = element_line(colour = "black"))
 
 spotted_recruit_plot 
 
-# Yellow Damselfish
+################# Yellow Damselfish #################
+
 yellow_recruit <- recruited %>% 
   filter(fish == "Yellow Damselfish") %>% 
   filter(number != 0)
 
 yellow_recruit_plot <- ggplot(yellow_recruit, aes(x = location, y = number, fill = location)) +
-  geom_bar(stat = "identity", color = "black", position = "dodge") +
+  geom_bar(stat = "identity", color = "black", position = "dodge", alpha = 0.9) +
   geom_errorbar(aes(ymin = number - CI, ymax = number + CI), position = position_dodge(0.9), width = 0.3) +
   facet_wrap(~year) +
   labs(
     x = "Lagoon", 
     y = expression(Mean~Density~of~Fish~Recruits~(per~1~m^2~of~microhabitat)),
-    title = "Mean Density of Recruited Yellow Damselfish at Rarotonga and Aitutaki Lagoons in 2009 and 2018") +
+    title = "Mean Density of Recruited Yellow Damselfish") +
   scale_y_continuous(expand = c(0,0), limits = c(0,52), breaks = seq(0,50,10)) +
   scale_x_discrete(expand = c(0,0)) +
-  scale_fill_manual(name = "Lagoon", breaks = c("Aitutaki", "Rarotonga"), values = alpha(c("cornflowerblue", "mediumseagreen"), 0.75)) +
+  scale_fill_manual(values = (sanzo.duo("c047"))) +
   theme_bw() +
+  theme(legend.position = "none") +
   theme(text = element_text(family = "serif")) +
-  theme(plot.title = element_text(size = 12, hjust = 0.5, face = "bold")) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
   theme(panel.background = element_blank(),
         axis.line = element_line(colour = "black"))
 
@@ -367,7 +396,8 @@ Use data sets I and II to calculate the density of fish recruits per 100 m2 area
 
 # Multiply number of fish recruits per 1 m2 of microhabitat by the density of "other organisms" (microhabitat) per 100 m2 of reef area to get the density of fish recruits per 100 m2 of reef area
 
-# Surgeonfish (microhabitat = Fine-branching Coral)
+################# Surgeonfish (microhabitat = Fine-branching Coral) #################
+
 surgeonfish_recruit_density <- (surgeonfish_recruit$number * finecoral$density_habitat)
 
 surgeonfish_all <- cbind(surgeonfish_recruit_density, surgeonfish)
@@ -388,6 +418,7 @@ surgeonfish_all_plot <- ggplot(surgeonfish_all, aes(
     title = expression(Density~of~Surgeonfish~Recruits~and~Adults~per~100~m^2~of~reef~area),
     color = "Lagoon",
     shape = "Year")+
+  scale_color_manual(values = sanzo.duo("c091")) +
   theme_bw() +
   theme(text = element_text(family = "serif")) +
   theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
@@ -396,7 +427,8 @@ surgeonfish_all_plot <- ggplot(surgeonfish_all, aes(
 
 surgeonfish_all_plot
 
-# Coral Trout (microhabitat = Coarse-branching Coral)
+################# Coral Trout (microhabitat = Coarse-branching Coral) #################
+
 coraltrout_recruit_density <- (coraltrout_recruit$number * coarsecoral$density_habitat)
 
 coraltrout_all <- cbind(coraltrout_recruit_density, coraltrout)
@@ -417,6 +449,7 @@ coraltrout_all_plot <- ggplot(coraltrout_all, aes(
     title = expression(Density~of~Coral~Trout~Recruits~and~Adults~per~100~m^2~of~reef~area),
     color = "Lagoon",
     shape = "Year")+
+  scale_color_manual(values = sanzo.duo("c091")) +
   theme_bw() +
   theme(text = element_text(family = "serif")) +
   theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
@@ -425,7 +458,8 @@ coraltrout_all_plot <- ggplot(coraltrout_all, aes(
 
 coraltrout_all_plot
 
-# Spotted Damselfish (microhabitat = Sea Anemones)
+################# Spotted Damselfish (microhabitat = Sea Anemones) #################
+
 spotted_recruit_density <- (spotted_recruit$number * anemone$density_habitat)
 
 spotted_all <- cbind(spotted_recruit_density, spotteddamselfish)
@@ -446,6 +480,7 @@ spotted_all_plot <- ggplot(spotted_all, aes(
     title = expression(Density~of~Spotted~Damselfish~Recruits~and~Adults~per~100~m^2~of~reef~area),
     color = "Lagoon",
     shape = "Year")+
+  scale_color_manual(values = sanzo.duo("c091")) +
   theme_bw() +
   theme(text = element_text(family = "serif")) +
   theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
@@ -454,7 +489,8 @@ spotted_all_plot <- ggplot(spotted_all, aes(
 
 spotted_all_plot
 
-# Yellow Damselfish (microhabitat = Mounding Coral)
+################# Yellow Damselfish (microhabitat = Mounding Coral) #################
+
 yellow_recruit_density <- (yellow_recruit$number * moundingcoral$density_habitat)
 
 yellow_all <- cbind(yellow_recruit_density, yellowdamselfish)
@@ -475,6 +511,7 @@ yellow_all_plot <- ggplot(yellow_all, aes(
     title = expression(Density~of~Yellow~Damselfish~Recruits~and~Adults~per~100~m^2~of~reef~area),
     color = "Lagoon",
     shape = "Year")+
+  scale_color_manual(values = sanzo.duo("c091")) +
   theme_bw() +
   theme(text = element_text(family = "serif")) +
   theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
@@ -496,7 +533,8 @@ make 4 different plots, 1 per fish species.) Which show a relationship? What are
 
 # Create XY scatter plot of density of adults and density of microhabitat used by their young
 
-# Surgeonfish (adult surgeonfish density vs fine-branching coral density)
+################# Surgeonfish vs fine-branching coral #################
+
 surgeon_fine <- cbind(surgeonfish, finecoral$density_habitat)
 
 surgeon_fine_r2 <- surgeon_fine %>% 
@@ -511,7 +549,9 @@ surgeon_fine_plot <- ggplot(surgeon_fine, aes(x = finecoral$density_habitat, y =
     y = expression(Density~of~Adult~Fish~(Number~per~100~m^2~of~reef)), 
     title = "Density of Adult Surgeonfish and Fine-branching Coral",
     color = "Lagoon",
-    shape = "Year")+
+    shape = "Year") +
+  annotate(geom = "text", x = 1, y = 350, label = paste("R^2 ==", format(surgeon_fine_r2, digits = 4)), color = "red4", family = "serif", parse = TRUE) +
+  scale_color_manual(values = sanzo.duo("c070")) +
   theme_bw() +
   theme(text = element_text(family = "serif")) +
   theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
@@ -520,7 +560,8 @@ surgeon_fine_plot <- ggplot(surgeon_fine, aes(x = finecoral$density_habitat, y =
 
 surgeon_fine_plot
 
-# Coral Trout (adult coral trout density vs coarse-branching coral density)
+################# Coral Trout vs coarse-branching coral #################
+
 coral_coarse <- cbind(coraltrout, coarsecoral$density_habitat)
 
 coral_coarse_r2 <- coral_coarse %>% 
@@ -536,6 +577,8 @@ coral_coarse_plot <- ggplot(coral_coarse, aes(x = coarsecoral$density_habitat, y
     title = "Density of Adult Coral Trout and Coarse-branching Coral",
     color = "Lagoon",
     shape = "Year")+
+  annotate(geom = "text", x = 1.25, y = 150, label = paste("R^2 ==", format(coral_coarse_r2, digits = 4)), color = "red4", family = "serif", parse = TRUE) +
+  scale_color_manual(values = sanzo.duo("c070")) +
   theme_bw() +
   theme(text = element_text(family = "serif")) +
   theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
@@ -544,7 +587,8 @@ coral_coarse_plot <- ggplot(coral_coarse, aes(x = coarsecoral$density_habitat, y
 
 coral_coarse_plot
 
-# Spotted Damselfish (adult spotted damselfish density vs sea anemones density)
+################# Spotted Damselfish vs sea anemones #################
+
 spotted_anemone <- cbind(spotteddamselfish, anemone$density_habitat)
 
 spotted_anemone_r2 <- spotted_anemone %>% 
@@ -560,6 +604,8 @@ spotted_anemone_plot <- ggplot(spotted_anemone, aes(x = anemone$density_habitat,
     title = "Density of Adult Spotted Damselfish and Sea Anemones",
     color = "Lagoon",
     shape = "Year")+
+  annotate(geom = "text", x = 0.8, y = 875, label = paste("R^2 ==", format(spotted_anemone_r2, digits = 4)), color = "red4", family = "serif", parse = TRUE) +
+  scale_color_manual(values = sanzo.duo("c070")) +
   theme_bw() +
   theme(text = element_text(family = "serif")) +
   theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
@@ -568,7 +614,8 @@ spotted_anemone_plot <- ggplot(spotted_anemone, aes(x = anemone$density_habitat,
 
 spotted_anemone_plot
 
-# Yellow Damselfish (adult yellow damselfish density vs mounding coral density)
+################# Yellow Damselfish vs mounding coral #################
+
 yellow_mounding <- cbind(yellowdamselfish, moundingcoral$density_habitat)
 
 yellow_mounding_r2 <- yellow_mounding %>% 
@@ -584,6 +631,8 @@ yellow_mounding_plot <- ggplot(yellow_mounding, aes(x = moundingcoral$density_ha
     title = "Density of Adult Yellow Damselfish and Mounding Coral",
     color = "Lagoon",
     shape = "Year")+
+  annotate(geom = "text", x = 15, y = 85, label = paste("R^2 ==", format(yellow_mounding_r2, digits = 2)), color = "red4", family = "serif", parse = TRUE) +
+  scale_color_manual(values = sanzo.duo("c070")) +
   theme_bw() +
   theme(text = element_text(family = "serif")) +
   theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
@@ -593,14 +642,295 @@ yellow_mounding_plot <- ggplot(yellow_mounding, aes(x = moundingcoral$density_ha
 yellow_mounding_plot
 
 ```
+Adult Surgeonfish and adult Spotted Damselfish show a strong positive correlation between their densities and their young's microhabitat (Fine-branching Coral and Sea Anemones, respectively) densities. Adult Coral Trout show a positive correlation between its density and its youn'g microhabitat (Coarse-branching Coral) density. These relationships indicate trends of increasing young fish microhabitat leading to increasing adult fish associated with that microhabitat. There is no significant correlation between adult Yellow Damselfish density and its young's microhabitat (Mounding Coral) density. This relationship indicates there is no trend associated with Mounding Coral and adult Yellow Damselfish.
 
 
 ####5. Density of adults per area of microhabitat used by young
 
 For each species of fish, calculate for each year and lagoon the density of adults per area of bottom covered by the microhabitat used by the young. For each species of fish, make a histogram of the mean density of adults per area of juvenile microhabitat (use the same graphing method as in Question 1; you will need to make 4 different graphs, 1 per species of fish). Which species show apparent differences in the density of adults per area of juvenile microhabitat between Rarotonga and Aitutaki and between years? (Do not concern yourself with the 95% CI for these comparisons, just look to see which, if any, appear extremely different.) What are those trends?
 
+```{r #5}
+
+################# Surgeonfish #################
+
+# Find density of adults/microhabitat (fine-branching coral)
+surgeon_fine$adult_micro <- surgeon_fine$density/surgeon_fine$`finecoral$density_habitat`
+
+surgeon_micro_plot <- ggplot(surgeon_fine, aes(x = location, y = adult_micro, fill = location)) +
+  geom_bar(stat = "identity", color = "black", position = "dodge", alpha = 0.9) +
+  facet_wrap(~year) +
+  labs(
+    x = "Lagoon", 
+    y = expression(Mean~Density~of~Adult~Fish~(per~100~m^2~of~Microhabitat)),
+    title = "Density of Adult Surgeonfish per Fine-branching Coral Microhabitat Area") +
+  scale_y_continuous(expand = c(0,0), limits = c(0,150)) +
+  scale_x_discrete(expand = c(0,0)) +
+  scale_fill_manual(values = (sanzo.duo("c119"))) +
+  theme_bw() +
+  theme(legend.position = "none") +
+  theme(text = element_text(family = "serif")) +
+  theme(plot.title = element_text(size = 12, hjust = 0.5, face = "bold")) +
+  theme(panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))
+
+surgeon_micro_plot  
+
+################# Coral Trout #################
+
+# Find density of adults/microhabitat (coarse-branching coral)
+coral_coarse$adult_micro <- coral_coarse$density/coral_coarse$`coarsecoral$density_habitat`
+
+coral_micro_plot <- ggplot(coral_coarse, aes(x = location, y = adult_micro, fill = location)) +
+  geom_bar(stat = "identity", color = "black", position = "dodge", alpha = 0.9) +
+  facet_wrap(~year) +
+  labs(
+    x = "Lagoon", 
+    y = expression(Mean~Density~of~Adult~Fish~(per~100~m^2~of~Microhabitat)),
+    title = "Density of Adult Coral Trout per Coarse-branching Coral Microhabitat Area") +
+  scale_y_continuous(expand = c(0,0), limits = c(0,55)) +
+  scale_x_discrete(expand = c(0,0)) +
+  scale_fill_manual(values = (sanzo.duo("c119"))) +
+  theme_bw() +
+  theme(legend.position = "none") +
+  theme(text = element_text(family = "serif")) +
+  theme(plot.title = element_text(size = 12, hjust = 0.5, face = "bold")) +
+  theme(panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))
+
+coral_micro_plot  
+
+################# Spotted Damselfish #################
+
+# Find density of adults/microhabitat (sea anemones)
+spotted_anemone$adult_micro <- spotted_anemone$density/spotted_anemone$`anemone$density_habitat`
+
+spotted_micro_plot <- ggplot(spotted_anemone, aes(x = location, y = adult_micro, fill = location)) +
+  geom_bar(stat = "identity", color = "black", position = "dodge", alpha = 0.9) +
+  facet_wrap(~year) +
+  labs(
+    x = "Lagoon", 
+    y = expression(Mean~Density~of~Adult~Fish~(per~100~m^2~of~Microhabitat)),
+    title = "Density of Adult Spotted Damselfish per Sea Anemone Microhabitat Area") +
+  scale_y_continuous(expand = c(0,0), limits = c(0,550)) +
+  scale_x_discrete(expand = c(0,0)) +
+  scale_fill_manual(values = (sanzo.duo("c119"))) +
+  theme_bw() +
+  theme(legend.position = "none") +
+  theme(text = element_text(family = "serif")) +
+  theme(plot.title = element_text(size = 12, hjust = 0.5, face = "bold")) +
+  theme(panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))
+
+spotted_micro_plot 
+
+################# Yellow Damselfish #################
+
+# Find density of adults/microhabitat (mounding coral)
+yellow_mounding$adult_micro <- yellow_mounding$density/yellow_mounding$`moundingcoral$density_habitat`
+
+yellow_micro_plot <- ggplot(yellow_mounding, aes(x = location, y = adult_micro, fill = location)) +
+  geom_bar(stat = "identity", color = "black", position = "dodge", alpha = 0.9) +
+  facet_wrap(~year) +
+  labs(
+    x = "Lagoon", 
+    y = expression(Mean~Density~of~Adult~Fish~(per~100~m^2~of~Microhabitat)),
+    title = "Density of Adult Yellow Damselfish per Mounding Coral Microhabitat Area") +
+  scale_y_continuous(expand = c(0,0), limits = c(0,5.5)) +
+  scale_x_discrete(expand = c(0,0)) +
+  scale_fill_manual(values = (sanzo.duo("c119"))) +
+  theme_bw() +
+  theme(legend.position = "none") +
+  theme(text = element_text(family = "serif")) +
+  theme(plot.title = element_text(size = 12, hjust = 0.5, face = "bold")) +
+  theme(panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))
+
+yellow_micro_plot 
+
+```
+Between Rarotonga and Aitutaki, Surgeonfish and Coral Trout show apparent differences in the density of adults per area of juvenile microhabitat in both 2009 and 2018, with densities being lower in Rarotonga compared to Aitutaki. Spotted Damselfish show apparent differences in the density of adults per area of juvenile microhabitat in 2018, with densities being much lower in Rarotonga compared to Aitutaki, but densities are pretty similar between the two lagoons in 2009. Surgeonfish, Coral Trout, and Spotted Damselfish all show an apparent decrease in the density of adults per area of juvenile habitat in both lagoons between 2009 and 2018, with the largest decreases appearing in Rarotonga between 2009 and 2018 for both Coral Trout and Spotted Damselfish. Yellow Damselfish show an apparent increase in the density of adults per area of juvenile habitat in both lagoons between 2009 and 2018, although there isn't much difference between the two lagoons in both years.
+
 
 ####6. Compare densities of adults
 
 For each pair of fish species, make an ‘XY(Scatter)’ plot (with linear trend line and R-square value) for the densities of adults (i.e., plot the densities of one species against another; you need to make 6 different graphs). Which show patterns and what are those trends?
+
+```{r #6}
+
+################# Surgeonfish vs Coral Trout #################
+
+# Add coral trout density to surgeonfish tibble
+surgeon_trout <- cbind(surgeonfish, coraltrout$density)
+
+# Find R2
+surgeon_trout_r2 <- surgeon_trout %>% 
+  summarize(R2 = summary(lm(density ~ `coraltrout$density`))$r.squared)
+  # R2 = 0.3275856
+
+surgeon_trout_plot <- ggplot(surgeon_trout, aes(x = density, y = `coraltrout$density`)) +
+  geom_point(size = 5, aes(color = location, shape = factor(year))) +
+  geom_smooth(method = lm, se = F, color = "slategrey") +
+  labs(
+    x = expression(Adult~Surgeonfish~Density~(Number~per~100~m^2~of~reef)),
+    y = expression(Adult~Coral~Trout~Density~(Number~per~100~m^2~of~reef)),
+    title = "Surgeonfish and Coral Trout Densities",
+    color = "Lagoon",
+    shape = "Year")+
+  annotate(geom = "text", x = 100, y = 150, label = paste("R^2 ==", format(surgeon_trout_r2, digits = 4)), color = "red4", family = "serif", parse = TRUE) +
+  scale_color_manual(values = sanzo.duo("c114")) +
+  theme_bw() +
+  theme(text = element_text(family = "serif")) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
+  theme(panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))
+
+surgeon_trout_plot
+
+################# Surgeonfish vs Spotted Damselfish #################
+
+# Add spotted damselfish density to surgeonfish tibble
+surgeon_spotted <- cbind(surgeonfish, spotteddamselfish$density)
+
+# Find R2
+surgeon_spotted_r2 <- surgeon_spotted %>% 
+  summarize(R2 = summary(lm(density ~ `spotteddamselfish$density`))$r.squared)
+  # R2 = 0.410623
+
+surgeon_spotted_plot <- ggplot(surgeon_spotted, aes(x = density, y = `spotteddamselfish$density`)) +
+  geom_point(size = 5, aes(color = location, shape = factor(year))) +
+  geom_smooth(method = lm, se = F, color = "slategrey") +
+  labs(
+    x = expression(Adult~Surgeonfish~Density~(Number~per~100~m^2~of~reef)),
+    y = expression(Adult~Spotted~Damselfish~Density~(Number~per~100~m^2~of~reef)),
+    title = "Surgeonfish and Spotted Damselfish Densities",
+    color = "Lagoon",
+    shape = "Year")+
+  annotate(geom = "text", x = 100, y = 750, label = paste("R^2 ==", format(surgeon_spotted_r2, digits = 4)), color = "red4", family = "serif", parse = TRUE) +
+  scale_color_manual(values = sanzo.duo("c114")) +
+  theme_bw() +
+  theme(text = element_text(family = "serif")) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
+  theme(panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))
+
+surgeon_spotted_plot
+
+################# Surgeonfish vs Yellow Damselfish #################
+
+# Add yellow damselfish density to surgeonfish tibble
+surgeon_yellow <- cbind(surgeonfish, yellowdamselfish$density)
+
+# Find R2
+surgeon_yellow_r2 <- surgeon_yellow %>% 
+  summarize(R2 = summary(lm(density ~ `yellowdamselfish$density`))$r.squared)
+  # R2 = 0.2015835
+
+surgeon_yellow_plot <- ggplot(surgeon_yellow, aes(x = density, y = `yellowdamselfish$density`)) +
+  geom_point(size = 5, aes(color = location, shape = factor(year))) +
+  geom_smooth(method = lm, se = F, color = "slategrey") +
+  labs(
+    x = expression(Adult~Surgeonfish~Density~(Number~per~100~m^2~of~reef)),
+    y = expression(Adult~Yellow~Damselfish~Density~(Number~per~100~m^2~of~reef)),
+    title = "Surgeonfish and Yellow Damselfish Densities",
+    color = "Lagoon",
+    shape = "Year")+
+  annotate(geom = "text", x = 200, y = 85, label = paste("R^2 ==", format(surgeon_yellow_r2, digits = 4)), color = "red4", family = "serif", parse = TRUE) +
+  scale_color_manual(values = sanzo.duo("c114")) +
+  theme_bw() +
+  theme(text = element_text(family = "serif")) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
+  theme(panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))
+
+surgeon_yellow_plot
+
+################# Coral Trout vs Spotted Damselfish #################
+
+# Add spotted damselfish density to coral trout tibble
+trout_spotted <- cbind(coraltrout, spotteddamselfish$density)
+
+# Find R2
+trout_spotted_r2 <- trout_spotted %>% 
+  summarize(R2 = summary(lm(density ~ `spotteddamselfish$density`))$r.squared)
+  # R2 = 0.9704437
+
+trout_spotted_plot <- ggplot(trout_spotted, aes(x = density, y = `spotteddamselfish$density`)) +
+  geom_point(size = 5, aes(color = location, shape = factor(year))) +
+  geom_smooth(method = lm, se = F, color = "slategrey") +
+  labs(
+    x = expression(Adult~Coral~Trout~Density~(Number~per~100~m^2~of~reef)),
+    y = expression(Adult~Spotted~Damselfish~Density~(Number~per~100~m^2~of~reef)),
+    title = "Coral Trout and Spotted Damselfish Densities",
+    color = "Lagoon",
+    shape = "Year")+
+  annotate(geom = "text", x = 50, y = 750, label = paste("R^2 ==", format(trout_spotted_r2, digits = 4)), color = "red4", family = "serif", parse = TRUE) +
+  scale_color_manual(values = sanzo.duo("c114")) +
+  theme_bw() +
+  theme(text = element_text(family = "serif")) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
+  theme(panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))
+
+trout_spotted_plot
+
+################# Coral Trout vs Yellow Damselfish #################
+
+# Add yellow damselfish density to coral trout tibble
+trout_yellow <- cbind(coraltrout, yellowdamselfish$density)
+
+# Find R2
+trout_yellow_r2 <- trout_yellow %>% 
+  summarize(R2 = summary(lm(density ~ `yellowdamselfish$density`))$r.squared)
+  # R2 = 0.8914587
+
+trout_yellow_plot <- ggplot(trout_yellow, aes(x = density, y = `yellowdamselfish$density`)) +
+  geom_point(size = 5, aes(color = location, shape = factor(year))) +
+  geom_smooth(method = lm, se = F, color = "slategrey") +
+  labs(
+    x = expression(Adult~Coral~Trout~Density~(Number~per~100~m^2~of~reef)),
+    y = expression(Adult~Yellow~Damselfish~Density~(Number~per~100~m^2~of~reef)),
+    title = "Coral Trout and Yellow Damselfish Densities",
+    color = "Lagoon",
+    shape = "Year")+
+  annotate(geom = "text", x = 125, y = 80, label = paste("R^2 ==", format(trout_yellow_r2, digits = 4)), color = "red4", family = "serif", parse = TRUE) +
+  scale_color_manual(values = sanzo.duo("c114")) +
+  theme_bw() +
+  theme(text = element_text(family = "serif")) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
+  theme(panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))
+
+trout_yellow_plot
+
+################# Spotted Damselfish vs Yellow Damselfish #################
+
+# Add yellow damselfish density to spotted damselfish tibble
+spotted_yellow <- cbind(spotteddamselfish, yellowdamselfish$density)
+
+# Find R2
+spotted_yellow_r2 <- spotted_yellow %>% 
+  summarize(R2 = summary(lm(density ~ `yellowdamselfish$density`))$r.squared)
+  # R2 = 0.7656169
+
+spotted_yellow_plot <- ggplot(spotted_yellow, aes(x = density, y = `yellowdamselfish$density`)) +
+  geom_point(size = 5, aes(color = location, shape = factor(year))) +
+  geom_smooth(method = lm, se = F, color = "slategrey") +
+  labs(
+    x = expression(Adult~Spotted~Damselfish~Density~(Number~per~100~m^2~of~reef)),
+    y = expression(Adult~Yellow~Damselfish~Density~(Number~per~100~m^2~of~reef)),
+    title = "Spotted Damselfish and Yellow Damselfish Densities",
+    color = "Lagoon",
+    shape = "Year")+
+  annotate(geom = "text", x = 625, y = 80, label = paste("R^2 ==", format(spotted_yellow_r2, digits = 4)), color = "red4", family = "serif", parse = TRUE) +
+  scale_color_manual(values = sanzo.duo("c114")) +
+  theme_bw() +
+  theme(text = element_text(family = "serif")) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
+  theme(panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))
+
+spotted_yellow_plot
+
+```
+When Yellow Damselfish density is compared to any other fish' density, the correlation is always negative.
 
