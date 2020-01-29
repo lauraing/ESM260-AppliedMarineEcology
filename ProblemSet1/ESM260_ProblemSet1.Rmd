@@ -2,9 +2,7 @@
 title: "ESM 260 - Problem Set 1"
 author: "Laura Ingulsrud"
 date: "1/26/2020"
-output:
-  word_document: default
-  html_document: default
+output: word_document
 ---
 
 ```{r setup, include=FALSE}
@@ -932,5 +930,31 @@ spotted_yellow_plot <- ggplot(spotted_yellow, aes(x = density, y = `yellowdamsel
 spotted_yellow_plot
 
 ```
-When Yellow Damselfish density is compared to any other fish' density, the correlation is always negative.
 
+```{r}
+
+surgeon_trout_plot
+
+```
+
+
+The densities of Coral Trout compared to Spotted Damselfish show a strong negative correlation across time; as 
+the density of adult Coral Trout decreased from 2009 to 2018, so did the density of Spotted Damselfish.
+
+When Yellow Damselfish density is compared to any other fish's density, the correlation is always negative(??).
+
+
+
+There is a strong, positive correlation between the density of adult coral trout and the density of adult spotted damselfish per 100 square meters (R^2 = 0.9704). As the density of coral trout increases, the density of spotted damselfish increases as well. There is a strong, negative correlation between adult coral trout density and yellow damselfish per 100 square meters (R2 = 0.8915), meaning that as coral trout densities increase, yellow damselfish density decreases. There is a relatively strong negative correlation observed for adult yellow damselfish and adult spotted damselfish densities (R2 = 0.7656), meaning that as adult yellow damselfish density increases, spotted damselfish density decreases. The rest of the species comparisons do not show strong correlations. 
+
+As Surgeonfish decrease in Rarotonga, Coral Trout decrease. As Surgeonfish increase in Aitutaki, Coral Trout decrease. The overal trend is postive, but isn't very strongly correlated.  
+
+As Surgeonfish decrease in Rarotonga, Spotted Damselfish decrease. As Surgeonfish increase in Aitutaki, Spotted Damselfish decrease. The overal trend is postive, but isn't very strongly correlated. 
+
+As Surgeonfish increased in Rarotonga, Yellow Damselfish decreased. As Surgeonfish increased, Yellow Damselfish increased in Aitutaki. Overall the trend is negative, but it isn't strongly correlated. 
+
+As Coral Trout decreased, Spotted Damselfish decreased in both Rarotonga and Aitutaki from 2009 to 2018. 
+
+From 2009 to 2018, Coral Trout decreased as Yellow Damselfish increased in Rarotonga and Aitutaki. 
+
+In both Rarotonga and Aitutaki, as Spotted Damselfish decreased, Yellow Damselfish increased from 2009 to 2018. 
