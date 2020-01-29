@@ -2,11 +2,13 @@
 title: "ESM 260 - Problem Set 1"
 author: "Laura Ingulsrud"
 date: "1/26/2020"
-output: word_document
+output: 
+  word_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(fig.height = 5, fig.width = 8)
 ```
 
 ```{r packages, include=FALSE}
@@ -28,9 +30,7 @@ recruited <- read_csv("recruited_fish.csv")
 
 ####1. Mean Density of Adult Fish
 
-For data set I (Mean Density of Adults) compare and contrast changes in the Rarotongan and Aitutaki Lagoons since 2009. For each organism, make a histogram that displays the mean density of the organism (y-axis) at Rarotonga and Aitutaki for 2009 and for 2018. Add the 95% confidence intervals to each graph. In your narrative, state which organisms that showed a statistically significant difference in density between Rarotonga and Aitutaki, and which showed a statistically significant difference between 2009 and 2019. State what the trends are. For now, we’ll adopt the convention that 2 means are statistically different if the mean of each is not included in the 95% confidence interval of the other mean.
-
-```{r #1}
+```{r #1, include=FALSE}
 
 # Create bar charts for each organism that displays the mean density of the organism (y-axis) at Rarotonga and Aitutaki for 2009 and 2018. Add the 95% confidence intervals to each graph.
 
@@ -260,19 +260,82 @@ algae_plot <- ggplot(algae, aes(x = location, y = density_habitat, fill = locati
 algae_plot
 
 ```
+
+```{r, echo=FALSE}
+
+surgeonfish_plot 
+
+```
+
 There were significantly less adult Surgeonfish in Rarotonga compared to Aitutaki in both 2009 and 2018, although this difference is more drastic in 2018. In Rarotonga, adult Surgeonfish significantly decreased from 2009 to 2018.
+
+```{r, echo=FALSE}
+
+coraltrout_plot
+
+```
 
 There were significantly less adult Coral Trout in Rarotonga compared to Aitutaki in 2009. In Aitutaki and Rarotonga, adult Coral Trout significantly decreased from 2009 to 2018.
 
+```{r, echo=FALSE}
+
+spotteddamselfish_plot
+
+```
+
 There were significantly less adult Spotted Damselfish in Rarotonga compared to Aitutaki in both 2009 and 2018. In Aitutaki and Rarotonga, adult Spotted Damselfish significantly decreased from 2009 to 2018.
+
+```{r, echo=FALSE}
+
+yellowdamselfish_plot
+
+```
 
 In Aitutaki and Rarotonga, adult Yellow Damselfish significantly increased from 2009 to 2018. 
 
+```{r, echo=FALSE}
+
+moundingcoral_plot
+
+```
+
+There are no statistically significant differences in mounding coral density across lagoons and years.
+
+```{r, echo=FALSE}
+
+coarsecoral_plot
+
+```
+
+In Rarotonga, Coarse-branching Corals significantly decreased from 2009 to 2018. Coarse-branching Corals density in Rarotonga is significantly less than in Aitutaki in 2018.
+
+```{r, echo=FALSE}
+
+finecoral_plot
+
+```
+
+In Rarotonga, Fine-branching Corals significantly decreased from 2009 to 2018. Coarse-branching Corals density in Rarotonga is significantly less than in Aitutaki in 2018.
+
+```{r, echo=FALSE}
+
+anemone_plot
+
+```
+
+In Rarotonga and Aitutaki, Sea Anemones significantly decreased from 2009 to 2018. Sea Anemone densities in Rarotonga significantly less than in Aitutaki in both 2009 and 2018.
+
+```{r, echo=FALSE}
+
+algae_plot
+
+```
+
+In Rarotonga, Algae significantly increased from 2009 to 2018. Algae density in Rarotonga is significantly greater than in Aitutaki in 2018.
 
 ####2. Mean Density of Recruited Young Fish
 
-Do the same as in Question 1 for the recruits (young) of each fish species.
-```{r #2}
+```{r #2, include=FALSE}
 
 # Create bar charts for each recruit (young) of each fish species that displays the mean density of the organism (y-axis) at Rarotonga and Aitutaki for 2009 and 2018. Add the 95% confidence intervals to each graph.
 
@@ -381,16 +444,42 @@ yellow_recruit_plot <- ggplot(yellow_recruit, aes(x = location, y = number, fill
 yellow_recruit_plot 
 
 ```
-In Rarotonga, recruited Coral Trout significantly decreased from 2009 to 2018.
+
+```{r, echo=FALSE}
+
+surgeonfish_recruit_plot 
+
+```
+
+There are no statistically significant differences in mounding coral density across lagoons and years.
+
+```{r, echo=FALSE}
+
+coraltrout_recruit_plot
+
+```
+
+In Rarotonga, recruited Coral Trout significantly decreased from 2009 to 2018. There were significantly less recruited Coral Trout in Rarotonga compared to Aitutaki in 2018.
+
+```{r, echo=FALSE}
+
+spotted_recruit_plot
+
+```
+
+There are no statistically significant differences in mounding coral density across lagoons and years.
+
+```{r, echo=FALSE}
+
+yellow_recruit_plot
+
+```
 
 There were significantly more recruited Yellow Damselfish in Rarotonga compared to Aitutaki in both 2009 and 2018. In both Aitutaki and Rarotonga, recruited Yellow Damselfish significantly increased from 2009 to 2018.
 
-
 ####3. Density of Fish Recruits per 100m^2 Area of Reef
 
-Use data sets I and II to calculate the density of fish recruits per 100 m2 area of reef. Note that the density of fish recruits is given as the number per 1 m2 of microhabitat, so you will need to figure out how to calculate the density of recruits per 100 m2 of reef area (not all of which is covered by the microhabitat occupied by the fish). For each fish species, make an XY Scatter plot to reveal the relationship between the density (per 100 m2 for reef area) of recruits and adults. Each place and time will be 1 data point, so each graph will have 4 data points. Add a linear trend line to each plot (select a graph, on Tool Bar press ‘Insert’ then ‘Trendline’, select ‘Trend/Regression Type’ = ‘Linear’, select options, check box ‘Display R-square Value on Chart’, press ‘OK’). Label the axes. Which species show correlations in adult and recruit densities and what are those relationships?
-
-```{r #3}
+```{r #3, include=FALSE}
 
 # Multiply number of fish recruits per 1 m2 of microhabitat by the density of "other organisms" (microhabitat) per 100 m2 of reef area to get the density of fish recruits per 100 m2 of reef area
 
@@ -416,6 +505,7 @@ surgeonfish_all_plot <- ggplot(surgeonfish_all, aes(
     title = expression(Density~of~Surgeonfish~Recruits~and~Adults~per~100~m^2~of~reef~area),
     color = "Lagoon",
     shape = "Year")+
+  annotate(geom = "text", x = 20, y = 350, label = paste("R^2 ==", format(surgeonfish_r2, digits = 4)), color = "red4", family = "serif", parse = TRUE) +
   scale_color_manual(values = sanzo.duo("c091")) +
   theme_bw() +
   theme(text = element_text(family = "serif")) +
@@ -447,6 +537,7 @@ coraltrout_all_plot <- ggplot(coraltrout_all, aes(
     title = expression(Density~of~Coral~Trout~Recruits~and~Adults~per~100~m^2~of~reef~area),
     color = "Lagoon",
     shape = "Year")+
+  annotate(geom = "text", x = 10, y = 150, label = paste("R^2 ==", format(coraltrout_r2, digits = 4)), color = "red4", family = "serif", parse = TRUE) +
   scale_color_manual(values = sanzo.duo("c091")) +
   theme_bw() +
   theme(text = element_text(family = "serif")) +
@@ -478,6 +569,7 @@ spotted_all_plot <- ggplot(spotted_all, aes(
     title = expression(Density~of~Spotted~Damselfish~Recruits~and~Adults~per~100~m^2~of~reef~area),
     color = "Lagoon",
     shape = "Year")+
+  annotate(geom = "text", x = 8, y = 750, label = paste("R^2 ==", format(spotted_r2, digits = 4)), color = "red4", family = "serif", parse = TRUE) +
   scale_color_manual(values = sanzo.duo("c091")) +
   theme_bw() +
   theme(text = element_text(family = "serif")) +
@@ -509,6 +601,7 @@ yellow_all_plot <- ggplot(yellow_all, aes(
     title = expression(Density~of~Yellow~Damselfish~Recruits~and~Adults~per~100~m^2~of~reef~area),
     color = "Lagoon",
     shape = "Year")+
+  annotate(geom = "text", x = 16, y = 80, label = paste("R^2 ==", format(yellow_r2, digits = 4)), color = "red4", family = "serif", parse = TRUE) +
   scale_color_manual(values = sanzo.duo("c091")) +
   theme_bw() +
   theme(text = element_text(family = "serif")) +
@@ -520,14 +613,42 @@ yellow_all_plot
 
 
 ```
-Surgeonfish, Coral Trout, and Spotted Damselfish all show a strong position correlation in adult and recruit densities. Yellow Damselfish shows a weaker negative correlation in adult and recruit densities.
+
+```{r, echo=FALSE}
+
+surgeonfish_all_plot
+
+```
+
+Surgeonfish shows a strong positive correlation in adult and recruit densities.
+
+```{r, echo=FALSE}
+
+coraltrout_all_plot
+
+```
+
+Coral Trout shows a strong positive correlation in adult and recruit densities.
+
+```{r, echo=FALSE}
+
+spotted_all_plot
+
+```
+
+Spotted Damselfish shows a strong positive correlation in adult and recruit densities.
+
+```{r, echo=FALSE}
+
+yellow_all_plot
+
+```
+
+Yellow Damselfish shows a weaker negative correlation in adult and recruit densities.
 
 ####4. Relationship between density of adults and density of microhabitat used by young
 
-For each species of fish, make an ‘XY Scatter’ plot (with linear trend line and R-square value) of the relationship between density of adults and density of microhabitat used by their young. (You need to
-make 4 different plots, 1 per fish species.) Which show a relationship? What are the trends?
-
-```{r #4}
+```{r #4, include=FALSE}
 
 # Create XY scatter plot of density of adults and density of microhabitat used by their young
 
@@ -640,14 +761,43 @@ yellow_mounding_plot <- ggplot(yellow_mounding, aes(x = moundingcoral$density_ha
 yellow_mounding_plot
 
 ```
-Adult Surgeonfish and adult Spotted Damselfish show a strong positive correlation between their densities and their young's microhabitat (Fine-branching Coral and Sea Anemones, respectively) densities. Adult Coral Trout show a positive correlation between its density and its youn'g microhabitat (Coarse-branching Coral) density. These relationships indicate trends of increasing young fish microhabitat leading to increasing adult fish associated with that microhabitat. There is no significant correlation between adult Yellow Damselfish density and its young's microhabitat (Mounding Coral) density. This relationship indicates there is no trend associated with Mounding Coral and adult Yellow Damselfish.
+
+```{r, echo=FALSE}
+
+surgeon_fine_plot
+
+```
+
+Adult Surgeonfish shows a strong positive correlation between its density and its young's microhabitat (Fine-branching Coral) density. In Aitutaki from 2009 to 2018, this relationship indicates a trend of increasing young fish microhabitat leading to increasing adult fish associated with that microhabitat. In Rarotonga from 2009 to 2018 however, this trend reverses, with both Fine-branching Coral and adult Surgeonfish decreasing over time.
+
+```{r, echo=FALSE}
+
+coral_coarse_plot
+
+```
+
+Adult Coral Trout shows a positive correlation between its density and its young's microhabitat (Coarse-branching Coral) density. In both Aitutaki and Rarotonga from 2009 to 2018, this relationship indicates a trend of both Coarse-branching Coral and adult Coral Trout decreasing over time. 
+
+```{r, echo=FALSE}
+
+spotted_anemone_plot
+
+```
+
+Adult Spotted Damselfish shows a strong positive correlation between its density and its young's microhabitat (Sea Anemones) density. In both Aitutaki and Rarotonga from 2009 to 2018, this relationship indicates a trend of both Sea Anemones and adult Spotted Damselfish decreasing over time.
+
+```{r, echo=FALSE}
+
+yellow_mounding_plot
+
+```
+
+There is no significant correlation between adult Yellow Damselfish density and its young's microhabitat (Mounding Coral) density. This relationship indicates there is no trend associated with Mounding Coral and adult Yellow Damselfish.
 
 
 ####5. Density of adults per area of microhabitat used by young
 
-For each species of fish, calculate for each year and lagoon the density of adults per area of bottom covered by the microhabitat used by the young. For each species of fish, make a histogram of the mean density of adults per area of juvenile microhabitat (use the same graphing method as in Question 1; you will need to make 4 different graphs, 1 per species of fish). Which species show apparent differences in the density of adults per area of juvenile microhabitat between Rarotonga and Aitutaki and between years? (Do not concern yourself with the 95% CI for these comparisons, just look to see which, if any, appear extremely different.) What are those trends?
-
-```{r #5}
+```{r #5, include=FALSE}
 
 ################# Surgeonfish #################
 
@@ -746,14 +896,42 @@ yellow_micro_plot <- ggplot(yellow_mounding, aes(x = location, y = adult_micro, 
 yellow_micro_plot 
 
 ```
-Between Rarotonga and Aitutaki, Surgeonfish and Coral Trout show apparent differences in the density of adults per area of juvenile microhabitat in both 2009 and 2018, with densities being lower in Rarotonga compared to Aitutaki. Spotted Damselfish show apparent differences in the density of adults per area of juvenile microhabitat in 2018, with densities being much lower in Rarotonga compared to Aitutaki, but densities are pretty similar between the two lagoons in 2009. Surgeonfish, Coral Trout, and Spotted Damselfish all show an apparent decrease in the density of adults per area of juvenile habitat in both lagoons between 2009 and 2018, with the largest decreases appearing in Rarotonga between 2009 and 2018 for both Coral Trout and Spotted Damselfish. Yellow Damselfish show an apparent increase in the density of adults per area of juvenile habitat in both lagoons between 2009 and 2018, although there isn't much difference between the two lagoons in both years.
 
+```{r, echo=FALSE}
+
+surgeon_micro_plot
+
+```
+
+Between Rarotonga and Aitutaki, Surgeonfish show apparent differences in the density of adults per area of juvenile microhabitat in both 2009 and 2018, with densities being lower in Rarotonga compared to Aitutaki. Surgeonfish show an apparent decrease in the density of adults per area of juvenile habitat in both lagoons between 2009 and 2018.  
+
+```{r, echo=FALSE}
+
+coral_micro_plot
+
+```
+
+Between Rarotonga and Aitutaki, Coral Trout show apparent differences in the density of adults per area of juvenile microhabitat in both 2009 and 2018, with densities being lower in Rarotonga compared to Aitutaki. Coral Trout show an apparent decrease in the density of adults per area of juvenile habitat in both lagoons between 2009 and 2018, with a large decrease appearing in Rarotonga between 2009 and 2018.  
+
+```{r, echo=FALSE}
+
+spotted_micro_plot
+
+```
+
+Spotted Damselfish show apparent differences in the density of adults per area of juvenile microhabitat in 2018, with densities being much lower in Rarotonga compared to Aitutaki, but densities are pretty similar between the two lagoons in 2009. Spotted Damselfish show an apparent decrease in the density of adults per area of juvenile habitat in both lagoons between 2009 and 2018, with a large decreases appearing in Rarotonga between 2009 and 2018. 
+
+```{r, echo=FALSE}
+
+yellow_micro_plot
+
+```
+
+Yellow Damselfish show an apparent increase in the density of adults per area of juvenile habitat in both lagoons between 2009 and 2018, although there isn't much difference between the two lagoons in both years.
 
 ####6. Compare densities of adults
 
-For each pair of fish species, make an ‘XY(Scatter)’ plot (with linear trend line and R-square value) for the densities of adults (i.e., plot the densities of one species against another; you need to make 6 different graphs). Which show patterns and what are those trends?
-
-```{r #6}
+```{r #6, include=FALSE}
 
 ################# Surgeonfish vs Coral Trout #################
 
@@ -931,30 +1109,49 @@ spotted_yellow_plot
 
 ```
 
-```{r}
+```{r, echo=FALSE}
 
 surgeon_trout_plot
 
 ```
 
+There is a weak positive correlation between adult Coral Trout and adult Surgeonfish densities overall. In Aitutaki from 2009 to 2018, this relationship indicates a trend of increasing Surgeonfish but decreasing Coral Trout. In Rarotonga from 2009 to 2018, this relationship indicates a negative trend, with both Coral Trout and Surgeonfish decreasing over time.
 
-The densities of Coral Trout compared to Spotted Damselfish show a strong negative correlation across time; as 
-the density of adult Coral Trout decreased from 2009 to 2018, so did the density of Spotted Damselfish.
+```{r, echo=FALSE}
 
-When Yellow Damselfish density is compared to any other fish's density, the correlation is always negative(??).
+surgeon_spotted_plot
 
+```
 
+There is a weak positive correlation between adult Spotted Damselfish and adult Surgeonfish densities overall. In Aitutaki from 2009 to 2018, this relationship indicates a trend of increasing Surgeonfish but decreasing Spotted Damselfish. In Rarotonga from 2009 to 2018, this relationship indicates a negative trend, with both Spotted Damselfish and Surgeonfish decreasing over time.
 
-There is a strong, positive correlation between the density of adult coral trout and the density of adult spotted damselfish per 100 square meters (R^2 = 0.9704). As the density of coral trout increases, the density of spotted damselfish increases as well. There is a strong, negative correlation between adult coral trout density and yellow damselfish per 100 square meters (R2 = 0.8915), meaning that as coral trout densities increase, yellow damselfish density decreases. There is a relatively strong negative correlation observed for adult yellow damselfish and adult spotted damselfish densities (R2 = 0.7656), meaning that as adult yellow damselfish density increases, spotted damselfish density decreases. The rest of the species comparisons do not show strong correlations. 
+```{r, echo=FALSE}
 
-As Surgeonfish decrease in Rarotonga, Coral Trout decrease. As Surgeonfish increase in Aitutaki, Coral Trout decrease. The overal trend is postive, but isn't very strongly correlated.  
+surgeon_yellow_plot
 
-As Surgeonfish decrease in Rarotonga, Spotted Damselfish decrease. As Surgeonfish increase in Aitutaki, Spotted Damselfish decrease. The overal trend is postive, but isn't very strongly correlated. 
+```
 
-As Surgeonfish increased in Rarotonga, Yellow Damselfish decreased. As Surgeonfish increased, Yellow Damselfish increased in Aitutaki. Overall the trend is negative, but it isn't strongly correlated. 
+There is a weak negative correlation between adult Yellow Damselfish and adult Surgeonfish densities overall. In Aitutaki from 2009 to 2018, this relationship indicates a positive trend of increasing Surgeonfish and Yellow Damselfish. In Rarotonga from 2009 to 2018, this trend shows Yellow Damselfish increasing, while Surgeonfish is decreasing over time.
 
-As Coral Trout decreased, Spotted Damselfish decreased in both Rarotonga and Aitutaki from 2009 to 2018. 
+```{r, echo=FALSE}
 
-From 2009 to 2018, Coral Trout decreased as Yellow Damselfish increased in Rarotonga and Aitutaki. 
+trout_spotted_plot
 
-In both Rarotonga and Aitutaki, as Spotted Damselfish decreased, Yellow Damselfish increased from 2009 to 2018. 
+```
+There is a strong positive correlation between adult Coral Trout and adult Spotted Damselfish densities overall. In both Aitutaki and Rarotonga from 2009 to 2018, this relationship indicates a trend of decreasing Coral Trout and Spotted Damselfish over time.
+
+```{r, echo=FALSE}
+
+trout_yellow_plot
+
+```
+
+There is a strong negative correlation between adult Coral Trout and adult Yellow Damselfish densities overall. In both Aitutaki and Rarotonga from 2009 to 2018, this relationship indicates a trend of decreasing Coral Trout but increasing Yellow Damselfish over time.
+
+```{r, echo=FALSE}
+
+spotted_yellow_plot
+
+```
+
+There is a negative correlation between adult Spotted Damselfish and adult Yellow Damselfish densities overall. In both Aitutaki and Rarotonga from 2009 to 2018, this relationship indicates a trend of decreasing Spotted Damselfish but increasing Yellow Damselfish over time.
